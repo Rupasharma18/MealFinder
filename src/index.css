@@ -7,7 +7,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline{
+  border-color: black !important;
+}
+
+.MuiInputLabel-outlined.Mui-focused{
+  color: grey !important;
+}
+
+.MuiAppBar-colorPrimary{
+  background-color: black !important;
 }
