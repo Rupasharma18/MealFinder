@@ -5,10 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #2d2013 ;
 }
 
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline{
-  border-color: black !important;
+  border-color: #23180d !important;
 }
 
 .MuiInputLabel-outlined.Mui-focused{
@@ -16,5 +17,12 @@ body {
 }
 
 .MuiAppBar-colorPrimary{
-  background-color: black !important;
+  background-color: #23180d !important;
+}
+.MuiOutlinedInput-adornedEnd{
+  width: 500px;
+}
+
+.MuiInputBase-input:invalid{
+  background-color:white !important ;
 }

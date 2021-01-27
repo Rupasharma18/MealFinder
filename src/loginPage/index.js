@@ -67,8 +67,6 @@ handleChange(e){
 }
 handleSubmit(e){
     e.preventDefault();
-
-    console.log(this.state,"ggg")
     if(this.state.email.length>0 && this.state.password.length>0){
         this.props.login(this.state.email, this.state.password)
     }
@@ -81,7 +79,6 @@ handleSubmit(e){
 
 render(){
 const {classes} = this.props
-console.log(this.props.state.usersLogin.error)
 return (
     <Container component="main" maxWidth="md">
     <CssBaseline />
@@ -139,9 +136,7 @@ return (
 } 
 
 function mapState(state) {
-  console.log(state, "+++++++")
   const {loggedIn} = state.usersLogin
-  console.log({loggedIn}, "ll")
   return {loggedIn, state } ;
 }
 

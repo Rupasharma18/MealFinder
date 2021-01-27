@@ -9,7 +9,8 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { Card } from "@material-ui/core";
 import CardHeader from '@material-ui/core/CardHeader';
-import "../App.css"
+// import "../App.css"
+import {history}  from '../helper';
 const styles =() => ({
   root: {
     flexGrow: 1,
@@ -26,11 +27,11 @@ const styles =() => ({
   searchBtn:{
     float: "right",
     marginTop:" 15px !important",
-    backgroundColor:" black !important",
+    backgroundColor:"#23180d !important",
     width: "15%",
     height: "50px",
     "&:hover":{
-      backgroundColor:"black !important",
+      backgroundColor:"#23180d !important",
       
     }
   },
@@ -43,27 +44,45 @@ class Search extends React.Component{
         super(props)
         this.state = {
             searchInput:"",
-            loading:true
+            loading:true,
+            error:{
+              input:""
+            }
         }
     }
 
-    handleInputChange(e){
-        e.preventDefault();
-      
-        this.setState({
-            searchInput:e.target.value
-        })
-   
+handleInputChange(e){
+  e.preventDefault();
+  if(e.target.value !== ""){
+    this.setState({
+      searchInput:e.target.value
+  })
+  }
+  else{
+    this.props.ownState.ApiData.NotFound = false;
+    this.props.CallApI(e.target.value)
     }
+}
+    
     handleSubmit(e){
         e.preventDefault();
-        const inputName = this.state.searchInput;
-        this.props.CallApI(inputName)
+          const inputName = this.state.searchInput;
+          this.props.ownState.IngredientReducer.ingredientState.meals=null;
+          this.props.CallApI(inputName)
+    
+
+    }
+
+    componentDidMount(e){
+      if(history.location.pathname === "/home"){
+        this.props.CallApI( this.state.searchInput)
+      }
+
+ 
     }
 
 render(){
-        const {classes} =this.props 
-      console.log(this.state.searchInput, "input+")
+    const {classes} =this.props    
     return (
         <div>
             <AppBar/>
@@ -88,7 +107,7 @@ render(){
                 variant="contained"
                 color="primary"
                 className ={classes.searchBtn}
-               
+              //  disabled = {!this.state.searchInput}
                 > 
                 search
                 </Button>
@@ -96,7 +115,7 @@ render(){
             </div>
 
             </Container>
-
+   
 
           </div>
         )

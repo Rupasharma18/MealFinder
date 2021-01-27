@@ -12,11 +12,11 @@ export default function ApiData(state = Apistate, action) {
         case users.FETCH_MEAL_PENDING_BY_NAME:
             return {...state, pending: true}
         case users.FETCH_MEAL_SUCCESS_BY_NAME:
-            return {...state, meal: action.mealData, pending:false}  
+            return {...state, meal: action.payload, pending:false}  
         case users.FETCH_MEAL_ERROR_BY_NAME:
-            return {...state, error:action.error, pending:false}
+            return {...state, error:action.payload, pending:false}
         case users.FETCH_MEAL_NOTFOUND:
-            return{...state, NotFound: true}    
+            return{...state, NotFound: true,pending:false}    
         default:
             return state;
     }

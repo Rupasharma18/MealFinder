@@ -7,11 +7,11 @@ switch(action.type){
     case users.LOGIN_SUCCESS:
         return{
             loggedIn :true,
-            user : action.user
+            user : action.payload
         }
     case users.LOGIN_FAILURE:
         return {   loggedIn :false,
-        error:action.error
+        error:action.payload
         };
     case users.LOGOUT:
         return { loggedIn :false};
