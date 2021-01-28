@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Ingerdient from './IngerdientPage'
 import  HomePage  from './home';
@@ -21,6 +21,7 @@ class App extends React.Component {
             <Route exect path="/alphaComponent" component={alphaComponent}></Route>
             <Route exect path="/mealDetails" component={mealDetails}></Route>
             <Route exect path="/IngerdientPage" component={Ingerdient}></Route>
+            <Redirect to="/login" />
           </Switch>
             </div>
                 

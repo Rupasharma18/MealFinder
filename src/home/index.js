@@ -4,15 +4,12 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import { connect } from "react-redux";
 import { userActions } from "../actions"
-import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { Card } from "@material-ui/core";
 import CardHeader from '@material-ui/core/CardHeader';
 import Search from "../search";
 import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import {Link} from "react-router-dom"
+
 
 const styles = () => ({
     root: {
@@ -53,15 +50,13 @@ const styles = () => ({
         display:"flex",
         padding: "40px",
         justifyContent: "center",
+        fontFamily: "monospace"
         
     },
     line:{
         color:"white !important"
     },
-    // btnBlack:{
-    //     backgroundColor:" white !important",
-    //     color:"black !important"
-    // }
+
  
 })
 class Home extends React.Component {
@@ -100,7 +95,6 @@ class Home extends React.Component {
                                                 subheader={item.strTags}
                                             
                                             />
-
                                             <CardMedia
                                                 className={classes.media}
                                                 image={item.strMealThumb}
@@ -150,8 +144,6 @@ const APiAction = {
     LetterApi:userActions.LetterApi
 }
 function mapStatetoProps(ownState) {
-    //debugger
-    console.log(ownState, "mapsate+++++++")
     return { ownState }
 }
 const connectedHomePage = connect(mapStatetoProps, APiAction)(Home)

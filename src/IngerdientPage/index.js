@@ -4,7 +4,15 @@ import { connect } from "react-redux";
 import { userActions } from "../actions"
 import { withStyles } from '@material-ui/core/styles';
 import { Grid } from "@material-ui/core";
-const style = ()=>({
+import Dialog from '@material-ui/core/Dialog';
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+// import { TextField } from "@material-ui/core";
+
+const style = (theme)=>({
     main:{
         paddingTop:"40px"
     },
@@ -37,9 +45,72 @@ const style = ()=>({
         fontFamily:"monospace !important",
         textAlign:"center"
     },
+    root: {
+        margin: 0,
+        padding: "20px",
+   
+      },
+      closeButton: {
+        position: 'absolute !important',
+        right: theme.spacing(1),
+        top: theme.spacing(1),
+        color:"grey !important",
+      },
 })
-class IngerdientMeal  extends React.Component{
 
+const DialogTitle = withStyles(style)((props) => {
+    const { children, classes, onClose, ...other } = props;
+    return (
+      <MuiDialogTitle disableTypography className={classes.root} {...other}>
+        <Typography variant="h6">{children}</Typography>
+        {onClose ? (
+          <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+            <CloseIcon />
+          </IconButton>
+        ) : null}
+      </MuiDialogTitle>
+    );
+  });
+  
+  const DialogContent = withStyles((theme) => ({
+    root: {
+      padding: theme.spacing(2),
+      justifyContent:"center"
+    },
+  }))(MuiDialogContent);
+  
+  // const DialogActions = withStyles((theme) => ({
+  //   root: {
+  //     margin: 0,
+  //     padding: theme.spacing(1),
+  //   },
+  // }))(MuiDialogActions);
+
+
+
+class IngerdientMeal  extends React.Component{
+    constructor(props){
+        super(props)
+        this.state={
+            open:false
+        }
+    }
+
+
+
+    handleClickOpen = () => {
+        this.setState({
+          open:true
+        })
+      
+      };
+      
+      
+      handleClose = () => {
+      this.setState({
+        open:false
+      })
+      };
     render(){  
       const {classes} = this.props;
         const name = this.props.ownState.IngredientNameReducer.ingredientNameState[2]
@@ -50,18 +121,15 @@ class IngerdientMeal  extends React.Component{
             <div>
     
                 <Container component="main" maxWidth="lg" className={classes.main}>
-
                 <Grid container spacing={8}>
                     <Grid item sm={6}>
-                            <Typography variant="h4" className={classes.title}>
+                            <Typography variant="h4" className={classes.title} onClick={this.handleClickOpen}>
                                 {name}
                             </Typography>
 
-                         <img src={image} alt="image" style={{ width:"70%", paddingTop:"20%"}}/>
+                         <img src={image} alt="image" style={{ width:"70%", paddingTop:"20%", opacity:1}}/>
                     </Grid>
                     <Grid item sm={6}>
-
-
                     <Typography variant="h4" className={classes.tit1}>
                         Meal
 
@@ -94,6 +162,24 @@ class IngerdientMeal  extends React.Component{
                 </Grid>
            
                 </Container>
+
+                    <Container component="main" maxWidth="lg" justifyContent="center">
+
+                    <Dialog onClose={this.handleClose} aria-labelledby="customized-dialog-title" open={this.state.open} fullWidth={true} 
+                        maxWidth = {'sm'}>
+                        <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
+                        {name}'s Ingerdient Image
+                        </DialogTitle>
+                        <DialogContent dividers>
+                            <img src={image} alt="image" style={{width:"100%", borderRadius:"5px", opacity:1}}/>
+                        </DialogContent>
+                    </Dialog>
+                   
+                    </Container>
+
+
+
+
             </div>
         )
     }
@@ -110,5 +196,5 @@ function mapStatetoProps(ownState){
   return {ownState}
 }  
 const connectedPage = connect(mapStatetoProps, APiAction)(IngerdientMeal)
-export default withStyles(style)(connectedPage);
+export default withStyles(style, {withTheme: true })(connectedPage);
 

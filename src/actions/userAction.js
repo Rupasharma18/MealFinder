@@ -203,7 +203,7 @@ function IngerditeList() {
 
 
 
-// filter by ingredient meal api
+// filter  meal api
 
 function FilterIngredient(category, ingredient, area) {
 
@@ -298,7 +298,7 @@ function errorIngre(err) {
 function LetterApi(letter) {
 
     console.log(letter, "apiletttttttttttttttttttttt")
-  debugger
+
     const api = `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`
     return dispatch =>{
         dispatch(pending())

@@ -50,21 +50,11 @@ subtags:{
     width: "324px",
     marginLeft: "85px !important"
 },
-rightClass:{
-    float:"right",
-    display:"flex",
-    width:"700px",
-    flexWrap: "wrap",
-    overflow:"auto !important"
-    
-},
+
 bottomClass:{
-    // paddingTop:"80%",
     color:"#fff !important",
     textAlign:'center',
     fontFamily: "font-family: 'Open Sans', sans-serif !important",
-    // width:"80%",
-    // justifyContent:"center"
     margin:" 0 auto",
     paddingBottom:"30px",
     lineHeight: "1.4 !important",
@@ -78,20 +68,19 @@ heading:{
 arrowLeft:{
     color:"#c52d2f !important",
 fontSize:"200px",
-// paddingTop:"60px",
 width: "90px"
 },
 arrowRight:{
     color:"#c52d2f !important",
     fontSize:"200px",
-    // paddingTop:"60px",
     width: "90px"
-    // display:"flex"
+
 },
 pagination:{
     display:"flex",
     padding: "40px",
     justifyContent: "center",
+    fontFamily: "monospace"
     
 },
 line:{
@@ -104,9 +93,7 @@ textIngre:{
     fontSize:"18px !important",
     fontFamily:"monospace !important",
 },
-// mainDiv:{
-// paddingBottom:"50px"
-// }
+
 
 })
 
@@ -117,9 +104,6 @@ class MealDetail extends React.Component{
             letter:["A", "B", "C", "D", "E","F","G","H", "I","J", "K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"],
          count : 1   
         }
-        
-
-      
     }
 
     render(){
@@ -127,14 +111,11 @@ class MealDetail extends React.Component{
         const meal = this.props.ownState.MealidReducers.MealIdData.meals;
         console.log(meal, "meal++")
         const item1 = meal !== null? meal[0] || meal !== undefined:  <h1  style={{textAlign:"center", color:"white"}}>meal is not avaliable!</h1>
-        // let count1 =  Object.keys(meal[0])
-  
         let count=0
         return (
             <div>
                 <Container component="main" maxWidth="lg" className={classes.main}>
                     {meal === null? <h1 style={{textAlign:"center", color:"white"}}>meal is not avaliable!</h1>: meal.map((item, i)=>{
-                        console.log(item.idMeal, "ifddddddd")
                         return (
                         <div key={i} >
                             <Grid container spacing={3}>
@@ -159,20 +140,19 @@ class MealDetail extends React.Component{
                                     <Typography variant="h4" className={classes.tit1}>
                                         Ingredients
                                         </Typography>
-                                    <Grid container spacing={3} className={classes.rightClass}>
+                                    <Grid container spacing={3} >
                                     {Object.keys(item1).map((key,i) => {
                                     
                                         if( key.includes(`strIngredient${count+1}`)){
                                                 count++
-                                                const image = `https://www.themealdb.com/images/ingredients/${item[key]}-small.png`
+                                                const image = `https://www.themealdb.com/images/ingredients/${item[key]}.png`
                                             return ( 
                                             <Grid item sm={4}>
                                                 <div>
                                                     {item[key] === "" || item[key] === null? "": <img 
-                                                    src={`https://www.themealdb.com/images/ingredients/${item[key]}-small.png`} 
-                                                    style={{width: "200px"}}/>}
+                                                    src={`https://www.themealdb.com/images/ingredients/${item[key]}.png`} 
+                                                    style={{width: "100%"}}/>}
                                                     <Typography variant="h5" className={classes.textIngre} onClick={()=>{
-
                                                     this.props.Ingreditent(item[key], image)
                                               
                                                     }}>
@@ -219,7 +199,6 @@ class MealDetail extends React.Component{
                         this.props.LetterApi(item)
                         }}>
                              {item}
-                  
                        <span className={classes.line} >|</span>
                  </h2>
                 )
@@ -232,7 +211,6 @@ class MealDetail extends React.Component{
     }
 }
 function mapStatetoProps(ownState) {
-    console.log(ownState, "++++++++++++++++++++=ppp")
     return { ownState }
 }
 const APiAction = {
